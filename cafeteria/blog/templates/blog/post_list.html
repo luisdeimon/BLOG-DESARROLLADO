@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetería</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        header {
+            background-color: #8c6239; /* Color café */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        .presentation {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .presentation h2 {
+            color: #8c6239; /* Color café */
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .presentation p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .container ul li {
+            margin-bottom: 20px;
+        }
+        .container h2 a {
+            color: #8c6239; /* Color café */
+            text-decoration: none;
+        }
+        .container h2 a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #8c6239; /* Color café */
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cafetería</h1>
+    </header>
+    <div class="presentation">
+        <h2>Descubre Café Aromático</h2>
+        <p>Bienvenido a Café Aromático, un rincón acogedor donde el aroma del café fresco se mezcla con el ambiente tranquilo que invita a la relajación y a disfrutar de buenos momentos.</p>
+        <p>Nuestro café es seleccionado de las mejores plantaciones del mundo, garantizando una experiencia única en cada taza. Desde el espresso más intenso hasta los capuchinos más cremosos, cada bebida está cuidadosamente preparada por nuestros talentosos baristas.</p>
+        <p>Además del café, ofrecemos una variedad de deliciosos postres caseros y bocadillos saludables, perfectos para acompañar tu bebida favorita o para disfrutar como un dulce capricho en cualquier momento del día.</p>
+        <p>Visítanos y descubre por qué Café Aromático se ha convertido en el lugar preferido de los amantes del café en nuestra comunidad. Estamos comprometidos con brindarte una experiencia gastronómica excepcional en un ambiente acogedor y amigable.</p>
+    </div>
+    
+    <div class="container">
+        <ul>
+            {% for post in posts %}
+            <li>
+                <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+                <p>{{ post.created_at }}</p>
+                <p>{{ post.content|truncatewords:30 }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

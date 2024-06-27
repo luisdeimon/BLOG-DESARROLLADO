@@ -1,0 +1,78 @@
+<!-- post_detail.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Color de fondo suave */
+            color: #333; /* Color de texto principal */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4a2c1e; /* Marrón oscuro para encabezado */
+            color: #fff; /* Texto blanco en el encabezado */
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff; /* Fondo blanco para el contenido */
+            padding: 20px;
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra ligera */
+        }
+        .post-content {
+            margin-bottom: 20px;
+        }
+        .post-images img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto; /* Espacio entre imágenes */
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1); /* Sombra ligera */
+        }
+        .return-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .return-link a {
+            color: #4a2c1e; /* Marrón oscuro para el enlace de regreso */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .return-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ post.title }}</h1>
+    </header>
+    <div class="container">
+        <p class="post-date">Fecha de publicación: {{ post.created_at }}</p>
+        <div class="post-content">
+            <p>{{ post.content | linebreaks }}</p>
+        </div>
+        
+        <div class="post-images">
+            {% for image in post.images.all %}
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+            {% endfor %}
+        </div>
+        
+        <div class="return-link">
+            <a href="{% url 'post_list' %}">Volver al blog</a>
+        </div>
+    </div>
+</body>
+</html>
